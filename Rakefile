@@ -11,7 +11,7 @@ require 'rubygems/package_task'
 
 require 'rails'
 require 'sprockets/railtie'
-require 'turbo-sprockets'
+require 'turbo-sprockets-rails4'
 
 Bundler::GemHelper.install_tasks
 
