@@ -1,0 +1,6 @@
+.ruby-version
+Gemfile.lock
+pkg/
+spec/tmp
+spec/log
+spec/public
