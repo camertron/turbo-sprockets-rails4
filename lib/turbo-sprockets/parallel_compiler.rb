@@ -4,8 +4,6 @@ require 'json'
 
 module TurboSprockets
   class ParallelCompiler
-    DEFAULT_WORKER_COUNT = 2
-
     attr_reader :manifest
 
     def initialize(manifest)
@@ -86,7 +84,7 @@ module TurboSprockets
     end
 
     def worker_count
-      @worker_count ||= ENV.fetch('SPROCKETS_WORKER_COUNT', DEFAULT_WORKER_COUNT).to_i
+      TurboSprockets.worker_count
     end
 
     def environment
@@ -94,7 +92,7 @@ module TurboSprockets
     end
 
     def logger
-      ::TurboSprockets.logger
+      TurboSprockets.logger
     end
   end
 end

@@ -22,9 +22,9 @@ end
 module LetDeclarations
   extend RSpec::SharedContext
 
-  let(:app) do
-    Rails.application
-  end
+  let(:app) { Rails.application }
+  let(:assets) { app.assets }
+  let(:logger) { CapturingLogger.new }
 
   let(:assets_dir) do
     TurboSprockets::DummyApplication.root.join('public/assets')
@@ -62,5 +62,11 @@ RSpec.configure do |config|
     FileUtils.rm_rf(tmp_dir)
     FileUtils.rm_rf(assets_dir)
     FileUtils.mkdir_p(assets_dir)
+
+    allow(TurboSprockets).to receive(:logger).and_return(logger)
+  end
+
+  config.after(:each) do
+    TurboSprockets.instance_variable_set(:@configuration, nil)
   end
 end

@@ -43,13 +43,20 @@ describe TurboSprockets::ParallelCompiler do
   end
 
   it 'uses the specified number of workers' do
-    logger = CapturingLogger.new
-    allow(TurboSprockets).to receive(:logger).and_return(logger)
-
-    with_env('SPROCKETS_WORKER_COUNT' => '4') do
+    with_env('TURBO_SPROCKETS_WORKER_COUNT' => '4') do
       precompile!
     end
 
     expect(logger.messages).to include([:warn, 'Precompiling with 4 workers'])
+  end
+
+  it 'does not compile in parallel when configured not to' do
+    TurboSprockets.configure do |config|
+      config.precompile_in_parallel = false
+    end
+
+    precompile!
+
+    expect(logger.messages).to be_empty
   end
 end
