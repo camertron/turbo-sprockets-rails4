@@ -5,18 +5,40 @@ module TurboSprockets
   autoload :ParallelCompiler,  'turbo-sprockets/parallel_compiler'
   autoload :ParallelPreloader, 'turbo-sprockets/parallel_preloader'
 
-  DEFAULT_WORKER_COUNT = 2
-
   class Config
-    FIELDS = [:preload_in_parallel, :precompile_in_parallel]
+    attr_reader :precompiler, :preloader
 
-    attr_accessor *FIELDS
+    def initialize(options = {})
+      @precompiler = ComponentConfig.new(options.fetch(:precompiler, {}))
+      @preloader = ComponentConfig.new(options.fetch(:preloader, {}))
+    end
+  end
 
-    FIELDS.each { |f| alias_method :"#{f}?", f }
+  class ComponentConfig
+    DEFAULT_WORKER_COUNT = 2
+
+    attr_accessor :enabled, :worker_count, :logger
+    alias_method :enabled?, :enabled
 
     def initialize(options = {})
       options.each_pair do |key, value|
         send("#{key}=", value)
+      end
+    end
+
+    def worker_count
+      worker_count_from_env || @worker_count || DEFAULT_WORKER_COUNT
+    end
+
+    def logger
+      @logger || Rails.logger
+    end
+
+    private
+
+    def worker_count_from_env
+      if count = ENV['TURBO_SPROCKETS_WORKER_COUNT']
+        count.to_i
       end
     end
   end
@@ -26,18 +48,10 @@ module TurboSprockets
       yield configuration
     end
 
-    def logger
-      Rails.application.assets_manifest.send(:logger)
-    end
-
-    def worker_count
-      ENV.fetch('TURBO_SPROCKETS_WORKER_COUNT', DEFAULT_WORKER_COUNT).to_i
-    end
-
     def configuration
       @configuration ||= Config.new(
-        preload_in_parallel: true,
-        precompile_in_parallel: true
+        precompiler: { enabled: true },
+        preloader:   { enabled: true }
       )
     end
   end

@@ -4,8 +4,8 @@ module TurboSprockets
       unless Sprockets::Manifest.method_defined?(:compile_with_parallelism)
         Sprockets::Manifest.class_eval do
           def compile_with_parallelism(*args)
-            if ::TurboSprockets.configuration.precompile_in_parallel?
-              ::TurboSprockets::ParallelCompiler.new(self).compile(*args)
+            if TurboSprockets.configuration.precompiler.enabled?
+              TurboSprockets::ParallelCompiler.new(self).compile(*args)
             else
               compile_without_parallelism
             end
@@ -17,9 +17,19 @@ module TurboSprockets
     end
 
     config.after_initialize do
-      if ::TurboSprockets.configuration.preload_in_parallel?
-        ::TurboSprockets::AssetPreloader.preload!
-        ActiveRecord::Base.connection.reconnect!
+      if ::TurboSprockets.configuration.preloader.enabled?
+        # make sure routes are available before attempting to preload, since
+        # assets may make use of route helpers
+        Rails.application.reload_routes!
+
+        # actually do the preloading
+        TurboSprockets::ParallelPreloader.preload!
+
+        # for some reason parallel operations may cause activerecord to
+        # disconnect
+        if const_defined?(:ActiveRecord)
+          ActiveRecord::Base.connection.reconnect!
+        end
       end
     end
   end

@@ -25,7 +25,10 @@ module TurboSprockets
           in_processes: worker_count,
           finish: -> (*) {
             count_mutex.synchronize { count += 1 }
-            logger.info("#{count}/#{list.size} preloading assets... ")
+
+            if count % 10 == 0 || count == list.size
+              logger.info("#{count}/#{list.size} preloading assets... ")
+            end
           }
         }
 
@@ -67,7 +70,7 @@ module TurboSprockets
       end
 
       def worker_count
-        TurboSprockets.worker_count
+        TurboSprockets.configuration.preloader.worker_count
       end
 
       def config
@@ -79,7 +82,7 @@ module TurboSprockets
       end
 
       def logger
-        TurboSprockets.logger
+        TurboSprockets.configuration.preloader.logger
       end
     end
   end

@@ -42,7 +42,7 @@ describe TurboSprockets::ParallelCompiler do
     expect(manifest['assets']).to eq(files)
   end
 
-  it 'uses the specified number of workers' do
+  it 'uses the specified number of workers from the ENV' do
     with_env('TURBO_SPROCKETS_WORKER_COUNT' => '4') do
       precompile!
     end
@@ -50,9 +50,19 @@ describe TurboSprockets::ParallelCompiler do
     expect(logger.messages).to include([:warn, 'Precompiling with 4 workers'])
   end
 
+  it 'uses the specified number of workers from the config' do
+    TurboSprockets.configure do |config|
+      config.precompiler.worker_count = 5
+    end
+
+    precompile!
+
+    expect(logger.messages).to include([:warn, 'Precompiling with 5 workers'])
+  end
+
   it 'does not compile in parallel when configured not to' do
     TurboSprockets.configure do |config|
-      config.precompile_in_parallel = false
+      config.precompiler.enabled = false
     end
 
     precompile!

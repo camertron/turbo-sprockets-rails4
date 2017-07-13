@@ -58,12 +58,15 @@ end
 RSpec.configure do |config|
   config.include(LetDeclarations)
 
-  config.before(:each) do
+  config.before do
     FileUtils.rm_rf(tmp_dir)
     FileUtils.rm_rf(assets_dir)
     FileUtils.mkdir_p(assets_dir)
 
-    allow(TurboSprockets).to receive(:logger).and_return(logger)
+    TurboSprockets.configure do |config|
+      config.preloader.logger = logger
+      config.precompiler.logger = logger
+    end
   end
 
   config.after(:each) do

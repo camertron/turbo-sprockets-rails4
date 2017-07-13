@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.has_rdoc = true
 
   s.add_dependency 'parallel', '~> 1.0'
-  s.add_dependency 'railties', '>= 4', '< 5'
+  s.add_dependency 'railties', '>= 4'
   s.add_dependency 'sprockets', '~> 3.0'
 
   s.require_path = 'lib'

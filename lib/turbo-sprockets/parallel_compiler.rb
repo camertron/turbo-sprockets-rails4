@@ -84,7 +84,7 @@ module TurboSprockets
     end
 
     def worker_count
-      TurboSprockets.worker_count
+      TurboSprockets.configuration.precompiler.worker_count
     end
 
     def environment
@@ -92,7 +92,7 @@ module TurboSprockets
     end
 
     def logger
-      TurboSprockets.logger
+      TurboSprockets.configuration.precompiler.logger
     end
   end
 end
