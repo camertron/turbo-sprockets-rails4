@@ -17,9 +17,7 @@ module TurboSprockets
     end
 
     config.after_initialize do
-      # only preload assets if running as a server (there's no need to preload
-      # assets if you're starting up a console or a rake task)
-      if Rails.const_defined?(:Server) && ::TurboSprockets.configuration.preload_in_parallel?
+      if ::TurboSprockets.configuration.preload_in_parallel?
         ::TurboSprockets::AssetPreloader.preload!
         ActiveRecord::Base.connection.reconnect!
       end

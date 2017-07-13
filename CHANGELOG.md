@@ -1,4 +1,4 @@
-2.0.0
+1.1.0
 ===
 - Add parallel preloading capabilities.
 - Add asset resolver.
