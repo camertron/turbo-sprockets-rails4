@@ -1,10 +1,2 @@
-source 'https://rubygems.org'
-
-gemspec
-
-group :development, :test do
-  gem 'pry-byebug'
-  gem 'rails'
-  gem 'rake'
-  gem 'rspec', '~> 3.0'
-end
+ENV['BUNDLE_GEMFILE'] = File.expand_path('../Gemfile-rails-4.2.x', __FILE__)
+Bundle.load
