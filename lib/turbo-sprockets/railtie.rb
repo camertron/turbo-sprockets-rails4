@@ -11,7 +11,8 @@ module TurboSprockets
             end
           end
 
-          alias_method_chain :compile, :parallelism
+          alias_method :compile_without_parallelism, :compile
+          alias_method :compile, :compile_with_parallelism
         end
       end
     end
