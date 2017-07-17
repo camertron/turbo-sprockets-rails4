@@ -1,5 +1,5 @@
 .ruby-version
-Gemfile.lock
+Gemfile*.lock
 pkg/
 spec/tmp
 spec/log
