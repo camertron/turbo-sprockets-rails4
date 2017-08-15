@@ -1,3 +1,8 @@
+1.2.0
+===
+- Turn precompiler off in development by default, on for all other envs.
+- Turn preloader on in development by default, off for all other envs.
+
 1.1.0
 ===
 - Add parallel preloading capabilities.

@@ -49,9 +49,10 @@ module TurboSprockets
     end
 
     def configuration
+      # hopefully people think these are sane defaults :|
       @configuration ||= Config.new(
-        precompiler: { enabled: true },
-        preloader:   { enabled: true }
+        precompiler: { enabled: !Rails.env.development? },
+        preloader:   { enabled: Rails.env.development? && Rails.const_defined?(:Server) }
       )
     end
   end
