@@ -27,7 +27,7 @@ The turbo-sprockets precompiler precompiles assets in parallel using potentially
 
 #### Asset Preloader
 
-The asset preloader is a little different. As of Sprockets 3, a Rails server running in the development environment will attempt to compile and cache every asset your application might need _on the first page request_. This is different from how things used to work. In the old days, Rails would compile assets on-the-fly. For example, if your app requested dashboard.css but not home_page.css, Rails would only compile dashboard.css. For applications with a large number of assets, compiling all of them on the first page request can be prohibitively time-consuming. The asset preloader tries to allieviate this pain by compiling and caching assets in parallel when your app boots. It's like the precompiler, but for development.
+The asset preloader is a little different. As of Sprockets 3, a Rails server running in the development environment will attempt to compile and cache every asset your application might need _on the first page request_. This is different from how things used to work. In the old days, Rails would compile assets on-the-fly. For example, if your app requested dashboard.css but not home_page.css, Rails would only compile dashboard.css. For applications with a large number of assets, compiling all of them on the first page request can be prohibitively time-consuming. The asset preloader tries to alleviate this pain by compiling and caching assets in parallel when your app boots. It's like the precompiler, but for development.
 
 ### Configuration
 
