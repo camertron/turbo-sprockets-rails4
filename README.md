@@ -29,14 +29,6 @@ The turbo-sprockets precompiler precompiles assets in parallel using potentially
 
 The asset preloader is a little different. As of Sprockets 3, a Rails server running in the development environment will attempt to compile and cache every asset your application might need _on the first page request_. This is different from how things used to work. In the old days, Rails would compile assets on-the-fly. For example, if your app requested dashboard.css but not home_page.css, Rails would only compile dashboard.css. For applications with a large number of assets, compiling all of them on the first page request can be prohibitively time-consuming. The asset preloader tries to allieviate this pain by compiling and caching assets in parallel when your app boots. It's like the precompiler, but for development.
 
-### Getting Started
-
-Add turbo-sprockets to your Gemfile and run `bundle install` to get started:
-
-```ruby
-gem 'turbo-sprockets-rails4'
-```
-
 ### Configuration
 
 By default, asset preloading is enabled only in the development environment, and only if you're running `rails server`. Precompiling is enabled in every environment _except_ development. You can enable or disable these two components by configuring turbo-sprockets (generally in one of your environment files, or maybe an initializer):
