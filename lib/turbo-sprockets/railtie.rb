@@ -7,7 +7,7 @@ module TurboSprockets
             if TurboSprockets.configuration.precompiler.enabled?
               TurboSprockets::ParallelCompiler.new(self).compile(*args)
             else
-              compile_without_parallelism
+              compile_without_parallelism(*args)
             end
           end
 

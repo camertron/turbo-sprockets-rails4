@@ -1,3 +1,7 @@
+1.2.1
+===
+- Pass compile args correctly.
+
 1.2.0
 ===
 - Turn precompiler off in development by default, on for all other envs.
