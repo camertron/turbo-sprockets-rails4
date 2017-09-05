@@ -1,3 +1,7 @@
+1.2.2
+===
+- Check existence of Sprockets environment rather than `compile` config option.
+
 1.2.1
 ===
 - Pass compile args correctly.

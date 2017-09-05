@@ -8,10 +8,10 @@ module TurboSprockets
       #     => lux/checkmark_2x-7177b0151ec35ffb6d.png
       #
       def resolve(logical_path)
-        # If compile is true we're running in development and have access to the
-        # sprockets environment. If compile is false the sprockets environment
+        # If assets is not nil we're running in development and have access to the
+        # sprockets environment. If assets is nil the sprockets environment
         # will not be available, so we have to fall back to the asset manifest.
-        if Rails.application.config.assets.compile
+        if Rails.application.assets
           asset = Rails.application.assets.find_asset(logical_path)
 
           if Rails.application.config.assets.digest
