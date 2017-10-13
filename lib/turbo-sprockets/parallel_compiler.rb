@@ -34,8 +34,9 @@ module TurboSprockets
 
           { 'files' => {}, 'assets' => {} }.tap do |data|
             manifest.find([path]) do |asset|
+              next if File.exist?(asset.digest_path) # don't recompile
               logger.info("Writing #{asset.digest_path}")
-
+              
               data['files'][asset.digest_path] = properties_for(asset)
               data['assets'][asset.logical_path] = asset.digest_path
 
