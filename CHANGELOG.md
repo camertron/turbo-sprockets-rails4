@@ -1,3 +1,7 @@
+1.2.3
+===
+- Check for file before overwriting it in precomp
+
 1.2.2
 ===
 - Check existence of Sprockets environment rather than `compile` config option.
