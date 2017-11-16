@@ -1,3 +1,7 @@
+1.2.4
+===
+- Improved connection reset after parallel tasks (#2).
+
 1.2.3
 ===
 - Check for file before overwriting it in precomp
