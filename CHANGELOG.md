@@ -1,3 +1,7 @@
+1.2.5
+===
+- Make sure ActiveRecord constant is defined before clearing db connections (#3).
+
 1.2.4
 ===
 - Improved connection reset after parallel tasks (#2).
