@@ -28,7 +28,7 @@ module TurboSprockets
 
         # for some reason parallel operations may cause activerecord to
         # disconnect
-        ::ActiveRecord::Base.clear_active_connections!
+        ::ActiveRecord::Base.clear_active_connections! if const_defined?(:ActiveRecord)
       end
     end
   end
