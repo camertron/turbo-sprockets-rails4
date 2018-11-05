@@ -11,7 +11,6 @@ Gem::Specification.new do |s|
   s.description = s.summary = 'Speed up asset precompliation by compiling assets in parallel.'
 
   s.platform = Gem::Platform::RUBY
-  s.has_rdoc = true
 
   s.add_dependency 'parallel', '~> 1.0'
   s.add_dependency 'railties', '>= 4'
