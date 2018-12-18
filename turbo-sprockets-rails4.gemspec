@@ -7,6 +7,7 @@ Gem::Specification.new do |s|
   s.authors  = ['Cameron Dutro']
   s.email    = ['camertron@gmail.com']
   s.homepage = 'http://github.com/camertron/turbo-sprockets-rails4'
+  s.license  = "MIT"
 
   s.description = s.summary = 'Speed up asset precompliation by compiling assets in parallel.'
 
